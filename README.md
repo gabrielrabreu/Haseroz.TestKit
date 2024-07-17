@@ -5,4 +5,4 @@
 
 ## Overview
 
-Haseroz Test Kit for .NET is a specialized library aimed at boosting the testing capabilities of .NET applications. This library offers a suite of enhanced testing tools tailored for unit, integration, and functional testing. With the Haseroz Test Kit, developers can leverage more precise and powerful testing techniques, ensuring higher software quality and reliability.
+Haseroz Test Kit for .NET is a comprehensive library designed to enhance testing capabilities in .NET applications. This library provides a set of tools and utilities to facilitate unit testing, integration testing, and other testing scenarios.
