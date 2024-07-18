@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Bogus\Customs\" />
     <Folder Include="Bogus\Extensions\" />
-    <Folder Include="FluentAssertions\Customs\" />
   </ItemGroup>
 
   <ItemGroup Label="Package files">

@@ -38,6 +38,26 @@ public static class HttpResponseMessageAssertionsExtensions
     }
 
     [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> BeUnauthorized(
+        this HttpResponseMessageAssertions parent,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        parent.HaveStatusCode(HttpStatusCode.Unauthorized, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
+
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> BeForbidden(
+        this HttpResponseMessageAssertions parent,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        parent.HaveStatusCode(HttpStatusCode.Forbidden, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
+
+    [CustomAssertion]
     public static AndConstraint<HttpResponseMessageAssertions> BeNotFound(
         this HttpResponseMessageAssertions parent,
         string because = "",
@@ -58,22 +78,49 @@ public static class HttpResponseMessageAssertionsExtensions
     }
 
     [CustomAssertion]
-    public static AndConstraint<HttpResponseMessageAssertions> HaveLocation(
+    public static AndConstraint<HttpResponseMessageAssertions> BeUnprocessableEntity(
         this HttpResponseMessageAssertions parent,
-        string expected,
         string because = "",
         params object[] becauseArgs)
     {
-        var success = Execute.Assertion
-            .ForCondition(parent.Subject is not null)
-            .BecauseOf(because, becauseArgs)
-            .FailWith("Expected Location to be {0}{reason}, but HttpResponseMessage was <null>.", expected);
+        parent.HaveStatusCode(HttpStatusCode.UnprocessableEntity, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
 
-        if (success)
-            Execute.Assertion
-                .ForCondition(parent.Subject!.Headers.Location?.OriginalString == expected)
-                .BecauseOf(because, becauseArgs)
-                .FailWith("Expected Location to be {0}{reason}, but found {1}.", expected, parent.Subject.Headers.Location);
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> BeInternalServerError(
+        this HttpResponseMessageAssertions parent,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        parent.HaveStatusCode(HttpStatusCode.InternalServerError, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
+
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> BeServiceUnavailable(
+        this HttpResponseMessageAssertions parent,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        parent.HaveStatusCode(HttpStatusCode.ServiceUnavailable, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
+
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> HaveLocation(
+        this HttpResponseMessageAssertions parent,
+        string location,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        Execute.Assertion
+            .BecauseOf(because, becauseArgs)
+            .ForCondition(parent.Subject is not null)
+            .FailWith("Expected Location to be {0}{reason}, but HttpResponseMessage was <null>.", location)
+            .Then
+            .ForCondition(parent.Subject!.Headers.Location?.OriginalString == location)
+            .FailWith("Expected Location to be {0}{reason}, but found {1}.", location, parent.Subject.Headers.Location);
 
         return new AndConstraint<HttpResponseMessageAssertions>(parent);
     }

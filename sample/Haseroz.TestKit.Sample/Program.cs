@@ -1,9 +1,6 @@
-using Ardalis.Result;
-using Ardalis.Result.AspNetCore;
-using Haseroz.TestKit.Sample.Core.DTOs;
-using Haseroz.TestKit.Sample.Core.Services;
 using Serilog;
 using Serilog.Extensions.Logging;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +17,6 @@ microsoftLogger.LogInformation("Starting web host");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<SkuService>();
 
 var app = builder.Build();
 
@@ -30,27 +26,54 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost("/Skus", (CreateSkuRequestDto request, SkuService skuService) =>
-{
-    var result = skuService.Create(request);
+app.MapPost("/Status/OK", () => Results.Ok())
+    .WithOpenApi()
+    .WithName("StatusOK")
+    .WithTags("Status");
 
-    if (result.IsCreated())
-        return Results.Created(result.Location, result.GetValue());
+app.MapPost("/Status/Created", () => Results.Created("/Status/Created/1", null))
+    .WithOpenApi()
+    .WithName("StatusCreated")
+    .WithTags("Status");
 
-    return result.ToMinimalApiResult();
-})
-.WithOpenApi()
-.WithName("CreateSku")
-.WithTags("Skus")
-.WithSummary("Creates Sku");
+app.MapPost("/Status/BadRequest", () => Results.BadRequest())
+    .WithOpenApi()
+    .WithName("StatusBadRequest")
+    .WithTags("Status");
 
-app.MapDelete("/Skus/{SkuId}", (Guid skuId, SkuService skuService) =>
-{
-    return skuService.Delete(skuId).ToMinimalApiResult();
-})
-.WithOpenApi()
-.WithName("DeleteSku")
-.WithTags("Skus")
-.WithSummary("Deletes Skus by its ID");
+app.MapPost("/Status/Unauthorized", () => Results.Unauthorized())
+    .WithOpenApi()
+    .WithName("StatusUnauthorized")
+    .WithTags("Status");
+
+app.MapPost("/Status/Forbidden", () => Results.StatusCode((int)HttpStatusCode.Forbidden))
+    .WithOpenApi()
+    .WithName("StatusForbidden")
+    .WithTags("Status");
+
+app.MapPost("/Status/NotFound", () => Results.NotFound())
+    .WithOpenApi()
+    .WithName("StatusNotFound")
+    .WithTags("Status");
+
+app.MapPost("/Status/Conflict", () => Results.Conflict())
+    .WithOpenApi()
+    .WithName("StatusConflict")
+    .WithTags("Status");
+
+app.MapPost("/Status/UnprocessableEntity", () => Results.UnprocessableEntity())
+    .WithOpenApi()
+    .WithName("StatusUnprocessableEntity")
+    .WithTags("Status");
+
+app.MapPost("/Status/InternalServerError", () => Results.StatusCode((int)HttpStatusCode.InternalServerError))
+    .WithOpenApi()
+    .WithName("StatusInternalServerError")
+    .WithTags("Status");
+
+app.MapPost("/Status/ServiceUnavailable", () => Results.StatusCode((int)HttpStatusCode.ServiceUnavailable))
+    .WithOpenApi()
+    .WithName("StatusServiceUnavailable")
+    .WithTags("Status");
 
 await app.RunAsync();
