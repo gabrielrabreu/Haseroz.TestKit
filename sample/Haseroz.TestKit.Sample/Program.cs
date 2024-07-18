@@ -53,11 +53,4 @@ app.MapDelete("/Skus/{SkuId}", (Guid skuId, SkuService skuService) =>
 .WithTags("Skus")
 .WithSummary("Deletes Skus by its ID");
 
-app.Run();
-
-public partial class Program
-{
-    protected Program()
-    {
-    }
-}
+await app.RunAsync();
