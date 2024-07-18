@@ -27,54 +27,56 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+const string StatusEndpointTag = "Status";
+
 app.MapPost("/Status/OK", () => Results.Ok(new ModelExample() { Name = "Name1" }))
     .WithOpenApi()
     .WithName("StatusOK")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/Created", () => Results.Created("/Status/Created/1", null))
     .WithOpenApi()
     .WithName("StatusCreated")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/BadRequest", () => Results.BadRequest())
     .WithOpenApi()
     .WithName("StatusBadRequest")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/Unauthorized", () => Results.Unauthorized())
     .WithOpenApi()
     .WithName("StatusUnauthorized")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/Forbidden", () => Results.StatusCode((int)HttpStatusCode.Forbidden))
     .WithOpenApi()
     .WithName("StatusForbidden")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/NotFound", () => Results.NotFound())
     .WithOpenApi()
     .WithName("StatusNotFound")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/Conflict", () => Results.Conflict())
     .WithOpenApi()
     .WithName("StatusConflict")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/UnprocessableEntity", () => Results.UnprocessableEntity())
     .WithOpenApi()
     .WithName("StatusUnprocessableEntity")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/InternalServerError", () => Results.StatusCode((int)HttpStatusCode.InternalServerError))
     .WithOpenApi()
     .WithName("StatusInternalServerError")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/ServiceUnavailable", () => Results.StatusCode((int)HttpStatusCode.ServiceUnavailable))
     .WithOpenApi()
     .WithName("StatusServiceUnavailable")
-    .WithTags("Status");
+    .WithTags(StatusEndpointTag);
 
 await app.RunAsync();
