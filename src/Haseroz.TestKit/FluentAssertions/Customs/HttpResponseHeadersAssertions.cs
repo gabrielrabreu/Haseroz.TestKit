@@ -17,6 +17,7 @@ public class HttpResponseHeadersAssertions(HttpResponseHeaders subject) :
         params object[] becauseArgs)
     {
         Execute.Assertion
+            .WithDefaultIdentifier(Identifier)
             .BecauseOf(because, becauseArgs)
             .Given(() => Subject.Location?.OriginalString)
             .ForCondition(location => location == expectedLocation)
