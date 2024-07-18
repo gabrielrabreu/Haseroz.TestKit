@@ -6,6 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Label="Package info">
+    <Authors>Gabriel Abreu(@gabrielrabreu)</Authors>
+    <PackageDescription>Versatile .NET library providing comprehensive testing utilities for streamlined unit and integration testing workflows in .NET applications.</PackageDescription>
+    <PackageProjectUrl>https://github.com/gabrielrabreu/Haseroz.TestKit.DotNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/gabrielrabreu/Haseroz.TestKit.DotNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>xUnit;TDD;BDD</PackageTags>
+    <PackageIcon>HaserozTestKit.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>$(Version)</Version>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.5.1" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
@@ -17,4 +30,11 @@
     <Folder Include="FluentAssertions\Customs\" />
   </ItemGroup>
 
+  <ItemGroup Label="Package files">
+    <None Include="..\HaserozTestKit.png" Visible="false" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Visible="false" Pack="true" PackagePath="/" />
+    <None Include="..\..\LICENSE" Visible="false" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
 </Project>
+ 
