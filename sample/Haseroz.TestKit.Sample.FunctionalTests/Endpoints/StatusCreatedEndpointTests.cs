@@ -14,7 +14,7 @@ public class StatusCreatedEndpointTests(WebApplicationFactory<IWebMarker> factor
     public async Task ReturnsCreated()
     {
         var response = await _client.PostAsync(ENDPOINT, null);
-        response.Should().BeCreated().And.HaveLocation("/Status/Created/1");
+        response.Should().BeCreated();
         response.Headers.Should().HaveLocation("/Status/Created/1");
     }
 }

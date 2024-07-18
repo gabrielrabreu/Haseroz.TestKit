@@ -229,40 +229,4 @@ public class HttpResponseMessageAssertionsExtensionsTests
         response.Invoking(r => r.Should().BeServiceUnavailable()).Should().Throw<XunitException>();
     }
     #endregion
-
-    #region HaveLocation
-    [Fact]
-    public void HaveLocation_WhenLocationMatch_ShouldPass()
-    {
-        // Arrange
-        var location = _faker.Internet.Url();
-        var response = new HttpResponseMessage(_faker.PickRandom<HttpStatusCode>());
-        response.Headers.Location = new Uri(location);
-
-        // Act & Assert
-        response.Invoking(r => r.Should().HaveLocation(location)).Should().NotThrow();
-    }
-
-    [Fact]
-    public void HaveLocation_WhenLocationIsNull_ShouldFail()
-    {
-        // Arrange
-        var response = new HttpResponseMessage(_faker.PickRandom<HttpStatusCode>());
-        response.Headers.Location = null;
-
-        // Act & Assert
-        response.Invoking(r => r.Should().HaveLocation(_faker.Internet.Url())).Should().Throw<XunitException>();
-    }
-
-    [Fact]
-    public void HaveLocation_WhenLocationDoesNotMatch_ShouldFail()
-    {
-        // Arrange
-        var response = new HttpResponseMessage(_faker.PickRandom<HttpStatusCode>());
-        response.Headers.Location = new Uri(_faker.Internet.Url());
-
-        // Act & Assert
-        response.Invoking(r => r.Should().HaveLocation(_faker.Internet.Url())).Should().Throw<XunitException>();
-    }
-    #endregion
 }

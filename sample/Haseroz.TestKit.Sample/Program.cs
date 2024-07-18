@@ -1,3 +1,4 @@
+using Haseroz.TestKit.Sample.Models;
 using Serilog;
 using Serilog.Extensions.Logging;
 using System.Net;
@@ -26,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost("/Status/OK", () => Results.Ok())
+app.MapPost("/Status/OK", () => Results.Ok(new ModelExample() { Name = "Name1" }))
     .WithOpenApi()
     .WithName("StatusOK")
     .WithTags("Status");

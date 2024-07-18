@@ -12,17 +12,15 @@ public class HttpResponseHeadersAssertions(HttpResponseHeaders subject) :
 
     [CustomAssertion]
     public AndConstraint<HttpResponseHeadersAssertions> HaveLocation(
-        string location,
+        string expectedLocation,
         string because = "",
         params object[] becauseArgs)
     {
         Execute.Assertion
             .BecauseOf(because, becauseArgs)
-            .ForCondition(Subject is not null)
-            .FailWith("Expected Location to be {0}{reason}, but HttpResponseHeaders was <null>.", location)
-            .Then
-            .ForCondition(Subject!.Location?.OriginalString == location)
-            .FailWith("Expected Location to be {0}{reason}, but found {1}.", location, Subject!.Location);
+            .Given(() => Subject.Location?.OriginalString)
+            .ForCondition(location => location == expectedLocation)
+            .FailWith("Expected {context} to have Location header with value {0}{reason}, but found {1}.", _ => expectedLocation, location => location);
 
         return new AndConstraint<HttpResponseHeadersAssertions>(this);
     }

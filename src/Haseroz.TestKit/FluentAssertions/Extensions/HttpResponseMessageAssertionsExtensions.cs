@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using System.Net;
 
@@ -104,24 +103,6 @@ public static class HttpResponseMessageAssertionsExtensions
         params object[] becauseArgs)
     {
         parent.HaveStatusCode(HttpStatusCode.ServiceUnavailable, because, becauseArgs);
-        return new AndConstraint<HttpResponseMessageAssertions>(parent);
-    }
-
-    [CustomAssertion]
-    public static AndConstraint<HttpResponseMessageAssertions> HaveLocation(
-        this HttpResponseMessageAssertions parent,
-        string location,
-        string because = "",
-        params object[] becauseArgs)
-    {
-        Execute.Assertion
-            .BecauseOf(because, becauseArgs)
-            .ForCondition(parent.Subject is not null)
-            .FailWith("Expected Location to be {0}{reason}, but HttpResponseMessage was <null>.", location)
-            .Then
-            .ForCondition(parent.Subject!.Headers.Location?.OriginalString == location)
-            .FailWith("Expected Location to be {0}{reason}, but found {1}.", location, parent.Subject.Headers.Location);
-
         return new AndConstraint<HttpResponseMessageAssertions>(parent);
     }
 }
