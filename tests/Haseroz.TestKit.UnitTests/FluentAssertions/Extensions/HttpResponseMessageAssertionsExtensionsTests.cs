@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using FluentAssertions;
+using Haseroz.TestKit.FluentAssertions.Extensions;
 using System.Net;
 
 namespace Haseroz.TestKit.UnitTests.FluentAssertions.Extensions;

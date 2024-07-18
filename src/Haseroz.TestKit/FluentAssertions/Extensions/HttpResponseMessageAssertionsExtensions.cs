@@ -1,8 +1,9 @@
-﻿using FluentAssertions.Execution;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using System.Net;
 
-namespace FluentAssertions;
+namespace Haseroz.TestKit.FluentAssertions.Extensions;
 
 public static class HttpResponseMessageAssertionsExtensions
 {
@@ -58,9 +59,9 @@ public static class HttpResponseMessageAssertionsExtensions
 
     [CustomAssertion]
     public static AndConstraint<HttpResponseMessageAssertions> HaveLocation(
-        this HttpResponseMessageAssertions parent, 
-        string expected, 
-        string because = "", 
+        this HttpResponseMessageAssertions parent,
+        string expected,
+        string because = "",
         params object[] becauseArgs)
     {
         var success = Execute.Assertion

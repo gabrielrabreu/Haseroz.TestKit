@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Haseroz.TestKit.FluentAssertions.Extensions;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Haseroz.TestKit.Sample.FunctionalTests.Endpoints;

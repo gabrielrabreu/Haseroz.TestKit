@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using FluentAssertions;
+using Haseroz.TestKit.FluentAssertions.Extensions;
 using Haseroz.TestKit.Sample.Core.DTOs;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
