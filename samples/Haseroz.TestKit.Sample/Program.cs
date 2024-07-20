@@ -1,7 +1,6 @@
 using Haseroz.TestKit.Sample.Models;
 using Serilog;
 using Serilog.Extensions.Logging;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,14 +28,19 @@ if (app.Environment.IsDevelopment())
 
 const string StatusEndpointTag = "Status";
 
-app.MapPost("/Status/OK", () => Results.Ok(new ModelExample() { Name = "Name1" }))
+app.MapPost("/Status/Ok", () => Results.Ok(new ModelExample() { Name = "Name1" }))
     .WithOpenApi()
-    .WithName("StatusOK")
+    .WithName("StatusOk")
     .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/Created", () => Results.Created("/Status/Created/1", null))
     .WithOpenApi()
     .WithName("StatusCreated")
+    .WithTags(StatusEndpointTag);
+
+app.MapPost("/Status/NoContent", () => Results.NoContent())
+    .WithOpenApi()
+    .WithName("StatusNoContent")
     .WithTags(StatusEndpointTag);
 
 app.MapPost("/Status/BadRequest", () => Results.BadRequest())
@@ -49,7 +53,7 @@ app.MapPost("/Status/Unauthorized", () => Results.Unauthorized())
     .WithName("StatusUnauthorized")
     .WithTags(StatusEndpointTag);
 
-app.MapPost("/Status/Forbidden", () => Results.StatusCode((int)HttpStatusCode.Forbidden))
+app.MapPost("/Status/Forbidden", () => Results.StatusCode(StatusCodes.Status403Forbidden))
     .WithOpenApi()
     .WithName("StatusForbidden")
     .WithTags(StatusEndpointTag);
@@ -69,12 +73,12 @@ app.MapPost("/Status/UnprocessableEntity", () => Results.UnprocessableEntity())
     .WithName("StatusUnprocessableEntity")
     .WithTags(StatusEndpointTag);
 
-app.MapPost("/Status/InternalServerError", () => Results.StatusCode((int)HttpStatusCode.InternalServerError))
+app.MapPost("/Status/InternalServerError", () => Results.StatusCode(StatusCodes.Status500InternalServerError))
     .WithOpenApi()
     .WithName("StatusInternalServerError")
     .WithTags(StatusEndpointTag);
 
-app.MapPost("/Status/ServiceUnavailable", () => Results.StatusCode((int)HttpStatusCode.ServiceUnavailable))
+app.MapPost("/Status/ServiceUnavailable", () => Results.StatusCode(StatusCodes.Status503ServiceUnavailable))
     .WithOpenApi()
     .WithName("StatusServiceUnavailable")
     .WithTags(StatusEndpointTag);
