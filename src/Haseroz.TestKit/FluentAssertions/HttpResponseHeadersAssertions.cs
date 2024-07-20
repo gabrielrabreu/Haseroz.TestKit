@@ -3,12 +3,12 @@ using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using System.Net.Http.Headers;
 
-namespace Haseroz.TestKit.FluentAssertions.Customs;
+namespace Haseroz.TestKit.FluentAssertions;
 
 public class HttpResponseHeadersAssertions(HttpResponseHeaders subject) :
     ObjectAssertions<HttpResponseHeaders, HttpResponseHeadersAssertions>(subject)
 {
-    protected override string Identifier => "HTTP response headers";
+    protected override string Identifier => nameof(HttpResponseHeadersAssertions);
 
     [CustomAssertion]
     public AndConstraint<HttpResponseHeadersAssertions> HaveLocation(

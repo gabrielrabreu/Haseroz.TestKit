@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Haseroz.TestKit.FluentAssertions.Extensions;
+using Haseroz.TestKit.FluentAssertions;
 using Haseroz.TestKit.Sample.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
@@ -19,7 +19,6 @@ public class StatusOKEndpointTests(WebApplicationFactory<IWebMarker> factory) : 
         response.Should().BeOK();
 
         var content = await response.Content.ReadFromJsonAsync<ModelExample>();
-        content.Should().NotBeNull();
-        content!.Name.Should().Be("Name1");
+        content.Should().NotBeNull().And.Satisfy<ModelExample>(x => x.Name.Should().Be("Name1"));
     }
 }

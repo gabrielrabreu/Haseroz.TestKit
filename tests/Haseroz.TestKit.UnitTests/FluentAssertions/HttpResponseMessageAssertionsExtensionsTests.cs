@@ -1,10 +1,10 @@
 ﻿using Bogus;
 using FluentAssertions;
-using Haseroz.TestKit.FluentAssertions.Extensions;
+using Haseroz.TestKit.FluentAssertions;
 using System.Net;
 using Xunit.Sdk;
 
-namespace Haseroz.TestKit.UnitTests.FluentAssertions.Extensions;
+namespace Haseroz.TestKit.UnitTests.FluentAssertions;
 
 public class HttpResponseMessageAssertionsExtensionsTests
 {
