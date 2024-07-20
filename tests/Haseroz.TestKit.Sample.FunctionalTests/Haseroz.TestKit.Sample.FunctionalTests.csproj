@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\samples\Haseroz.TestKit.Sample\Haseroz.TestKit.Sample.csproj" />
     <ProjectReference Include="..\..\src\Haseroz.TestKit\Haseroz.TestKit.csproj" />
-    <ProjectReference Include="..\..\sample\Haseroz.TestKit.Sample\Haseroz.TestKit.Sample.csproj" />
   </ItemGroup>
 
   <ItemGroup>
