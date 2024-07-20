@@ -19,6 +19,7 @@ public class StatusOKEndpointTests(WebApplicationFactory<IWebMarker> factory) : 
         response.Should().BeOK();
 
         var content = await response.Content.ReadFromJsonAsync<ModelExample>();
-        content.Should().NotBeNull().And.Satisfy<ModelExample>(x => x.Name.Should().Be("Name1"));
+        content.Should().NotBeNull(); 
+        content!.Name.Should().Be("Name1");
     }
 }
