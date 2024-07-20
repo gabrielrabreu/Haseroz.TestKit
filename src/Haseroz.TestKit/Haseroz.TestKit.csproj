@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
-    <None Include="..\..\docs\assets\HaserozDevKit.png" Visible="false" Pack="true" PackagePath="/" />
+    <None Include="..\..\docs\assets\HaserozTestKit.png" Visible="false" Pack="true" PackagePath="/" />
     <None Include="..\..\README.md" Visible="false" Pack="true" PackagePath="/" />
     <None Include="..\..\LICENSE" Visible="false" Pack="true" PackagePath="/" />
   </ItemGroup>
