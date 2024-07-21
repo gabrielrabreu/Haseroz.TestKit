@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 
 namespace Haseroz.TestKit.Sample.FunctionalTests.Endpoints;
 
-public class StatusOlkEndpointTests(WebApplicationFactory<IWebMarker> factory) : IClassFixture<WebApplicationFactory<IWebMarker>>
+public class StatusOkEndpointTests(WebApplicationFactory<IWebMarker> factory) : IClassFixture<WebApplicationFactory<IWebMarker>>
 {
     private const string ENDPOINT = "/Status/OK";
 
