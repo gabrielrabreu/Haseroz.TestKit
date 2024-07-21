@@ -10,25 +10,25 @@ public class HttpResponseMessageAssertionsExtensionsTests
 {
     private readonly Faker _faker = new();
 
-    #region BeOK
+    #region BeOk
     [Fact]
-    public void BeOK_WhenStatusCodeIsOK_ShouldPass()
+    public void BeOk_WhenStatusCodeIsOk_ShouldPass()
     {
         // Arrange
         var response = new HttpResponseMessage(HttpStatusCode.OK);
 
         // Act & Assert
-        response.Invoking(r => r.Should().BeOK()).Should().NotThrow();
+        response.Invoking(r => r.Should().BeOk()).Should().NotThrow();
     }
 
     [Fact]
-    public void BeOK_WhenStatusCodeIsNotOK_ShouldFail()
+    public void BeOk_WhenStatusCodeIsNotOk_ShouldFail()
     {
         // Arrange
         var response = new HttpResponseMessage(_faker.PickRandomWithout(HttpStatusCode.OK));
 
         // Act & Assert
-        response.Invoking(r => r.Should().BeOK()).Should().Throw<XunitException>();
+        response.Invoking(r => r.Should().BeOk()).Should().Throw<XunitException>();
     }
     #endregion
 
@@ -51,6 +51,28 @@ public class HttpResponseMessageAssertionsExtensionsTests
 
         // Act & Assert
         response.Invoking(r => r.Should().BeCreated()).Should().Throw<XunitException>();
+    }
+    #endregion
+
+    #region BeNoContent
+    [Fact]
+    public void BeNoContent_WhenStatusCodeIsCreated_ShouldPass()
+    {
+        // Arrange
+        var response = new HttpResponseMessage(HttpStatusCode.NoContent);
+
+        // Act & Assert
+        response.Invoking(r => r.Should().BeNoContent()).Should().NotThrow();
+    }
+
+    [Fact]
+    public void BeNoContent_WhenStatusCodeIsNotCreated_ShouldFail()
+    {
+        // Arrange
+        var response = new HttpResponseMessage(_faker.PickRandomWithout(HttpStatusCode.NoContent));
+
+        // Act & Assert
+        response.Invoking(r => r.Should().BeNoContent()).Should().Throw<XunitException>();
     }
     #endregion
 
