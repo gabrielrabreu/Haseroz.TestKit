@@ -7,7 +7,7 @@ namespace Haseroz.TestKit.FluentAssertions;
 public static class HttpResponseMessageAssertionsExtensions
 {
     [CustomAssertion]
-    public static AndConstraint<HttpResponseMessageAssertions> BeOK(
+    public static AndConstraint<HttpResponseMessageAssertions> BeOk(
         this HttpResponseMessageAssertions parent,
         string because = "",
         params object[] becauseArgs)
@@ -23,6 +23,16 @@ public static class HttpResponseMessageAssertionsExtensions
         params object[] becauseArgs)
     {
         parent.HaveStatusCode(HttpStatusCode.Created, because, becauseArgs);
+        return new AndConstraint<HttpResponseMessageAssertions>(parent);
+    }
+
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageAssertions> BeNoContent(
+        this HttpResponseMessageAssertions parent,
+        string because = "",
+        params object[] becauseArgs)
+    {
+        parent.HaveStatusCode(HttpStatusCode.NoContent, because, becauseArgs);
         return new AndConstraint<HttpResponseMessageAssertions>(parent);
     }
 
