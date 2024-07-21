@@ -179,7 +179,9 @@ public class HttpResponseMessageAssertionsExtensionsTests
     public void BeUnprocessableEntity_WhenStatusCodeIsNotUnprocessableEntity_ShouldFail()
     {
         // Arrange
-        var response = new HttpResponseMessage(_faker.PickRandomWithout(HttpStatusCode.UnprocessableEntity));
+        var items = Enum.GetValues(typeof(HttpStatusCode)).Cast<HttpStatusCode>()
+            .Where(code => code != HttpStatusCode.UnprocessableEntity && code != HttpStatusCode.UnprocessableContent);
+        var response = new HttpResponseMessage(_faker.PickRandom(items));
 
         // Act & Assert
         response.Invoking(r => r.Should().BeUnprocessableEntity()).Should().Throw<XunitException>();
