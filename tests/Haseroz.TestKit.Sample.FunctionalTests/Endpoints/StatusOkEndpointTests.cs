@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
-using Haseroz.TestKit.FluentAssertions.Extensions;
+using Haseroz.TestKit.FluentAssertions;
 using Haseroz.TestKit.Sample.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net.Http.Json;
 
 namespace Haseroz.TestKit.Sample.FunctionalTests.Endpoints;
 
-public class StatusOKEndpointTests(WebApplicationFactory<IWebMarker> factory) : IClassFixture<WebApplicationFactory<IWebMarker>>
+public class StatusOkEndpointTests(WebApplicationFactory<IWebMarker> factory) : IClassFixture<WebApplicationFactory<IWebMarker>>
 {
     private const string ENDPOINT = "/Status/OK";
 
@@ -19,7 +19,7 @@ public class StatusOKEndpointTests(WebApplicationFactory<IWebMarker> factory) : 
         response.Should().BeOK();
 
         var content = await response.Content.ReadFromJsonAsync<ModelExample>();
-        content.Should().NotBeNull();
+        content.Should().NotBeNull(); 
         content!.Name.Should().Be("Name1");
     }
 }

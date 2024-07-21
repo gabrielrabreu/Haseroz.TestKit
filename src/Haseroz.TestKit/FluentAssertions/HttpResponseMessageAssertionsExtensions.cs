@@ -2,7 +2,7 @@
 using FluentAssertions.Primitives;
 using System.Net;
 
-namespace Haseroz.TestKit.FluentAssertions.Extensions;
+namespace Haseroz.TestKit.FluentAssertions;
 
 public static class HttpResponseMessageAssertionsExtensions
 {

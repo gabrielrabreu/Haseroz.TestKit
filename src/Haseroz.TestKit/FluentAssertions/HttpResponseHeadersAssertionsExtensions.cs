@@ -1,7 +1,6 @@
-﻿using Haseroz.TestKit.FluentAssertions.Customs;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 
-namespace Haseroz.TestKit.FluentAssertions.Extensions;
+namespace Haseroz.TestKit.FluentAssertions;
 
 public static class HttpResponseHeadersAssertionsExtensions
 {
